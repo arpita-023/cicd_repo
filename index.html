@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enter Transaction Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 0;
+            margin: 0;
+        }
+        h1 {
+            text-align: center;
+            background-color: #3cb043;
+            color: white;
+            padding: 20px;
+            margin: 0;
+        }
+        form {
+            width: 90%;
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0 20px 0;
+            border: 1px solid #3cb043;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #3cb043;
+            color: white;
+            padding: 12px;
+            border: none;
+            width: 100%;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #3cb043;
+        }
+        .result {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #3cb043;
+        }
+    </style>
+</head>
+<body>
+    <h1>Enter Transaction Details</h1>
+    <form method="POST" action="/predict">
+        <label for="time">Time:</label>
+        <input type="text" name="time" required>
+        {% for i in range(1, 29) %}
+            <label for="v{{i}}">V{{i}}:</label>
+            <input type="text" name="v{{i}}" required>
+        {% endfor %}
+        <label for="amount">Amount:</label>
+        <input type="text" name="amount" required>
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if prediction_text %}
+        <div class="result">{{ prediction_text }}</div>
+    {% endif %}
+</body>
+</html>
